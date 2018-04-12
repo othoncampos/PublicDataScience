@@ -1,4 +1,4 @@
-create database siconv;
+--create database siconv;
 
 drop table if exists programas_disponibilizados;
 drop table if exists programas_propostas;
@@ -14,6 +14,7 @@ drop table if exists OBTV_convenente;
 drop table if exists termo_aditivo;
 drop table if exists prorroga_oficio;
 drop table if exists historico_situacao_propostas;
+drop table if exists populacao_estimada;
 
 create table programas_disponibilizados
 ( 
@@ -176,7 +177,7 @@ create table pagamentos_favorecidos
     NR_MOV_FIN         int           null, --Número identificador da movimentação financeira
     NR_CONVENIO        bigint        null, --Número gerado pelo Siconv. Possui faixa de numeração reservada que vai de 700000 a 999999
     IDENTIF_FORNECEDOR varchar(100)   null, --CNPJ\CPF do Fornecedor
-    NOME_FORNECEDOR    varchar(200)  null, --Nome do Fornecedor
+    NOME_FORNECEDOR    varchar(300)  null, --Nome do Fornecedor
     TP_MOV_FINANCEIRA  varchar(100)  null, --Tipo da movimentação financeira realizada. Domínio: Pagamento a favorecido, Pagamento a favorecido com OBTV
     DATA_PAG           date          null, --Data da realização do pagamento
     NR_DL              varchar(200)  null, --Número identificador do Documento de Liquidação
@@ -223,4 +224,13 @@ create table historico_situacao_propostas
     HISTORICO_SIT      varchar(100) null, --Situação histórica da Proposta/Convênio
     DIAS_HISTORICO_SIT int          null, --Dias em que a Proposta/Convênio permaneceu na situação
     COD_HISTORICO_SIT  int          null  --Código da situação histórica da Proposta/Convênio, contendo a ordem cronológica do ciclo de vida de um convênio
+);
+
+create table populacao_estimada
+(
+   uf       char(2)      not null,
+   cd_uf    int          not null,
+   cd_munic int          not null, 
+   nm_munic varchar(100) not null,
+   nr_habit int          not null
 );

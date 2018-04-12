@@ -103,7 +103,7 @@ CREATE TABLE pagamentos_favorecidos
   nr_mov_fin int,
   nr_convenio bigint,
   identif_fornecedor varchar(100),
-  nome_fornecedor text,
+  nome_fornecedor varchar(300),
   tp_mov_financeira varchar(200),
   data_pag date,
   nr_dl text,
@@ -209,4 +209,13 @@ CREATE TABLE termo_aditivo
   dt_inicio_ta date,
   dt_fim_ta date,
   justificativa_ta text
+);
+
+create table populacao_estimada
+(
+   uf       char(2)      not null,
+   cd_uf    int          not null,
+   cd_munic int          not null, 
+   nm_munic varchar(100) not null,
+   nr_habit int          not null
 );
