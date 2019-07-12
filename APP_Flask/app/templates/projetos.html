@@ -1,0 +1,41 @@
+﻿{% extends "base.html" %}
+{% block page %}
+<!-- TÍTULO -->
+<section class="mbr-section content5 cid-qRKDq0puBd mbr-parallax-background" id="content5-w">
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(72, 69, 129);">
+    </div>
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-12">
+                <h2 class="align-center mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
+                    {{Title}}
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIM TÍTULO -->
+<!-- CONTEÚDO -->
+<section class="mbr-section padding-20" id="projetos">
+    <div class="container" style="height: auto; padding-bottom: 40px;">
+        <p>Os projetos do site Transparência Traduzida têm o objetivo de analisar e traduzir dados brutos e abertos das diversas aréas do governo (municipal, estadual ou federal). Incialmente, disponibilizamos a análise e a tradução dos dados relativos aos convênios brasileiros. Entretanto, pretendemos desenvolver ferramentas para analisar e traduzir informações das áreas de saúde, transporte, educação e segurança pública.</p>
+        <div class="row">
+            <div class="col-lg-6" style="margin-bottom: 20px;">
+                <a href="http://portal.convenios.gov.br/" target="_blank"><img src="/static/images/siconv.png" alt="siconv" title="siconv" style="width: 100%;"></a>
+            </div>
+            <div class="col-lg-6" style="margin-bottom: 20px;">
+                <a href="#" target=""><img src="/static/images/saude.png" alt="saude" title="Saúde" style="width: 100%;"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6" style="margin-bottom: 20px;">
+                <a href="#" target=""><img src="/static/images/seguranca.png" alt="seguranca" title="Segurança" style="width: 100%;"></a>
+            </div>
+            <div class="col-lg-6">
+                <a href="#" target=""><img src="/static/images/transporte.png" alt="transporte" title="Transporte" style="width: 100%;"></a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIM CONTEÚDO -->
+{% endblock %}

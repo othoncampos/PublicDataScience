@@ -1,0 +1,69 @@
+﻿{% extends "base.html" %}
+{% block page %}
+<!-- FIM MENU -->
+<!-- TÍTULO -->
+<section class="mbr-section content5 cid-qRKDq0puBd mbr-parallax-background" id="content5-w">
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(72, 69, 129);">
+    </div>
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-12">
+                <h2 class="align-center mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
+                    {{Title}}
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIM TÍTULO -->
+<!-- FORMULÁRIO -->
+<section class="mbr-section form1 cid-qRKE6myU5k" id="form1-11">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-lg-8">
+                <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+                    <strong>
+                        {{Form_Title}}
+                    </strong>
+                </h2>
+                <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">O nosso propósito não é investigar ou dar encaminhamento à denúncias de corrupção. Assuntos relacionados a essas questões, sugerimos entrar em contato com Ministério Público, imprensa ou corregedorias e controladorias estaduais e municipais.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-8">
+                <div data-form-alert="" hidden="">Obrigado! Breve retornaremos.</div>
+                <form name="formulario" method="post" action="@Url.Content("~/Home/Contato")">
+                    <!--<input type="hidden" name="" data-form-email="true" value="" data-form-field="Email">-->
+                    <div class="row row-sm-offset">
+                        <div class="col-md-4 multi-horizontal">
+                            <div class="form-group">
+                                <label class="form-control-label i9ti-fonts-style display-7">Nome</label>
+                                <input type="text" class="form-control" name="Nome" id="Nome">
+                            </div>
+                        </div>
+                        <div class="col-md-4 multi-horizontal">
+                            <div class="form-group">
+                                <label class="form-control-label i9ti-fonts-style display-7">Email</label>
+                                <input type="email" class="form-control" name="EmailContato" id="EmailContato">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label i9ti-fonts-style display-7">Mensagem</label>
+                        <textarea class="form-control" rows="7" name="Mensagem" id="Mensagem"></textarea>
+                    </div>
+                    <span class="input-group-btn">
+                        <button href="" class="submit btn btn-primary btn-form display-4" type="submit" name="enviar" id="enviar" value="">ENVIAR</button>
+                        <!--<ul class="actions">
+                        <input class="submit" type="submit" name="enviar" id="enviar" value="Enviar Mensagem" />
+                        </ul>-->
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIM FORMULÁRIO -->
+{% endblock %}

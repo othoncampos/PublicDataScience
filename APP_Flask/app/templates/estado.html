@@ -1,0 +1,605 @@
+{% extends "base.html" %}
+{% block page %}
+<style>
+    .btn {
+        font-size:0.8rem !important;
+    }
+</style>
+<!-- TÍTULO -->
+<section class="mbr-section content5 cid-qRKDq0puBd mbr-parallax-background" id="content5-w">
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(72, 69, 129);">
+    </div>
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-12">
+                <h2 class="align-center mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
+                    {{estado.nome}}
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIM TÍTULO -->
+<!-- CONTEÚDO -->
+<section class="mbr-section padding-20" id="">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/index"><i class="fa fa-dashboard"></i> Início</a></li>
+            <span>&nbsp;/&nbsp;</span>
+            {{estado.nome}}
+        </ol>
+        <div class="">
+            <!-- TABELAS -->
+            <div class="row">
+                <!-- Grafico com -->
+                <div class="col-sm-12 col-md-12">
+                    <div id="columnchart_material" style="width: 100%; min-height: 300px; margin-bottom: 30px; "></div>
+                </div>
+                 <div class="col-sm-12 col-md-12">
+                    <div id="quant_prop_conv" style="width: 100%; min-height: 300px; margin-bottom: 30px; "></div>
+                </div>
+                 <div class="col-sm-12 col-md-12">
+                    <div id="quant_conv_meses" style="width: 100%; min-height: 300px; margin-bottom: 30px; "></div>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <div id="quant_conv_mes12" style="width: 100%; min-height: 300px; margin-bottom: 30px; "></div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="grafico1-tab" data-toggle="tab" href="#grafico1" role="tab" aria-controls="grafico1" aria-selected="true">Gráfico</a>
+                      <a class="nav-item nav-link" id="tabela1-tab" data-toggle="tab" href="#tabela1" role="tab" aria-controls="tabela1-profile" aria-selected="false">Tabela</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="grafico1" role="tabpanel" aria-labelledby="grafico1-tab">
+                        <div id="conv_parlamentar_quant" style="width: 100%; min-height: 300px; margin-bottom: 30px; "></div>
+                    </div>
+                    <div class="tab-pane fade" id="tabela1" role="tabpanel" aria-labelledby="tabela1-tab" style="background: #eee; overflow: scroll; height: 300px; margin-bottom: 30px">
+                      <p class="text-sm-center">Lista dos parlamentares e quantidade de convênios ativos</p>
+                      <div id="table_ParlamentaresQuantidadeConveniosAtivos"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Gráfico</a>
+                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Tabela</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div id="conv_parlamentar_valor" style="width: 100%; min-height: 300px; margin-bottom: 30px; "></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" style="background: #eee; overflow: scroll; height: 300px; margin-bottom: 30px;">
+                      <p class="text-sm-center">Lista dos parlamentares e valores dos convênios ativos</p>
+                      <div id="table_ParlamentaresValoresConveniosAtivos"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab_CV" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home-cv" role="tab" aria-controls="nav-home" aria-selected="true">Gráfico</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-cv" role="tab" aria-controls="nav-profile" aria-selected="false">Tabela</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home-cv" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div id="PieChartCidade_valor" style="width: 100%; min-height: 400px; margin-bottom: 30px; "></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile-cv" role="tabpanel" aria-labelledby="nav-profile-tab" style="background: #eee; overflow: scroll; height: 300px; margin-bottom: 30px;">
+                      <p class="text-sm-center">Distribuição dos recursos por proponentes</p>
+                      <div id="table_CidadeValor"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab_CV" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home-sc" role="tab" aria-controls="nav-home" aria-selected="true">Gráfico</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-sc" role="tab" aria-controls="nav-profile" aria-selected="false">Tabela</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home-sc" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div id="PieChartSituacaoConvenio" style="width: 100%; min-height: 400px; margin-bottom: 30px; "></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile-sc" role="tabpanel" aria-labelledby="nav-profile-tab" style="background: #eee; overflow: scroll; height: 300px; margin-bottom: 30px;">
+                      <p class="text-sm-center">Situação dos convênios</p>
+                      <div id="table_SituacaoConvenios"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-md-12">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab_CV" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home-da" role="tab" aria-controls="nav-home" aria-selected="true">Gráfico</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-da" role="tab" aria-controls="nav-profile" aria-selected="false">Tabela</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home-da" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div id="PieChartDistribuicaoArea" style="width: 100%; min-height: 400px; margin-bottom: 30px; "></div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile-da" role="tabpanel" aria-labelledby="nav-profile-tab" style="background: #eee; overflow: scroll; height: 300px; margin-bottom: 30px;">
+                      <p class="text-sm-center">Distribuição dos recursos por área</p>
+                      <div id="table_DistribuicaoArea"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-md-12">
+                        <div id="outlier" style="width: 100%; margin-bottom: 30px; ">
+                          <h2>Valores Discrepantes (Outliers)</h2>
+                          <p class="text-justify">Os <i>outliers</i> são algo fora do comum e que muitas vezes pode representar anomalias que evidenciem ilegalidades administrativas. Baseia-se em modelos estatísticos, dos quais se espera que os dados estejam em uma distribuição normal e as observações improváveis, com base na média e desvio padrão, são consideradas como valores aberrantes ou anormais. Utilizamos, nesta página, a técnica estatística de BoxPlot para analizar e representar graficamente os valores anormais (<i>outliers</i>). A construção deste gráfico utiliza a sumarização de 5 números: <b>min, q1, q2 ou mediana, q3, max</b>. Onde: </p>
+                        <!--
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+                        -->
+                      </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <ul>
+                    <li><b>min</b>: menor valor. Quando existirem <i>outliers</i>, o min passa a ser o menor valor anômalo;</li>
+                    <li><b>q1</b>: primeiro quartil. Indica que 25% de todos os números da série são <b>menores</b> que q1;</li>
+                    <li><b>q2 (mediana)</b>: segundo quartil ou mediana. Representa o valor que divide um conjunto de valores ordenados em partes iguais;</li>
+                    <li><b>q3</b>: terceiro quartil. Indica que 25% de todos os números da série são <b>maiores</b> que q3;</li>
+                    <li><b>max</b>: maior valor. Quando existirem <i>outliers</i>, o max passa a ser o maior valor anômalo.</li>
+                  </ul>
+                  Caso o gráfico exiba os <i>outliers</i>, representados por pontos, serão mostrados mais dois números. São eles: 
+                  <ul>
+                    <li><b>upper fence</b>: maior valor não anômalo;</li>
+                    <li><b>lower fence</b>: menor valor não anômalo.</li>
+                  </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 text-center">
+                    <h6>Exemplo de <i>boxplot</i> exibindo os seus respectivos números.</h6>
+                    <img class="img-responsive" src="{{url_for('static', filename='images/boxplot.png')}}" alt="Imagem">
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <p class="text-justify">No gráfico abaixo, temos representados os anos na horizontal, ou eixo X, e os valores dos convênios expressos em milhões (M) na vertical, ou eixo Y. Passe o mouse sobre o gráfico e veja os valores descritos acima. Para visualizar os detalhes sobre os convênios, <a class="link display-4" href="/outlier/{{estado.sigla}}">clique aqui.</a></p>
+                </div>
+
+                <div class="col-sm-12 col-md-12">
+                    <div id="box_plot" style="width: 100%; min-height: 500px; margin-bottom: 30px; overflow: scroll; "></div>
+                </div>
+
+                {% if estado.listaRegras | length > 0 %}
+                    <div class="col-sm-12 col-md-12">
+                        <div id="associacoes" style="width: 100%; margin-bottom: 30px; ">
+                          <h2>Associações</h2>
+                          As associações apresentadas são aquelas com significância estatística. Os parlamentares não listados possuem convênios mais distribuídos e não possuem uma ligação forte com uma área específica. 
+                          No estado d{{estado.artigoEstado}} {{estado.nome}}, foi(ram) encontrada(s) a(s) seguinte(s):
+                        </div>
+                    </div>
+                    {% for regra in estado.listaRegras %}
+                    <div class="col-sm-12 col-md-12 associacao">
+                        <div class="accordion" id="accordionExample{{regra[0]}}">
+                            <div class="card">
+                              {% if regra[11] == 1 %} <!-- Regras de "Parlamentares > Area" -->
+                                  <div class="card-header" id="headingOne{{regra[0]}}">
+                                      <h5 class="mb-0">
+                                          <button class="btn btn-link" style="padding: 0" type="button" data-toggle="collapse" data-target="#collapseOne{{regra[0]}}" aria-expanded="true" aria-controls="collapseOne">
+                                            {{regra[1] | ajustarNomeRegraLHS}} &#187; {{regra[2] | ajustarNomeRegraRHS }}
+                                          </button>
+                                      </h5>
+                                  </div>
+                                  <div id="collapseOne{{regra[0]}}" class="collapse show" aria-labelledby="headingOne{{regra[0]}}" data-parent="#accordionExample{{regra[0]}}">
+                                    <div class="card-body">
+                                      <b>{{regra[1] | ajustarNomeRegraLHS}}</b> está associado(a) ao(à) {{regra[11] | ajustarTipoRegra}} {{regra[11] | ajustarTipoRegra}} <b>{{regra[2] | ajustarNomeRegraRHS }}</b>. Convênios liderados por <b>{{regra[1] | ajustarNomeRegraLHS}}</b> para esta área aparecem em <b>{{regra[3]}}%</b> das ocorrências de convênios. O que significa dizer que são <b>{{regra[6]}}</b> convênios em um total de <b>{{regra[13]}}</b> convênios ativos. A confiança desta associação é de <b>{{regra[4]}}%</b>, ou seja, <b>{{regra[4]}}%</b> dos convênios do(a) parlamentar <b>{{regra[1] | ajustarNomeRegraLHS}}</b> são voltados para o <b>{{regra[2]  | ajustarNomeRegraRHS}}</b>. Esta dependência possui uma significância estatística de <b>{{regra[9]}}%</b>.
+                                    </div>
+                                  </div>
+                                {% elif regra[11] == 2 %} <!-- Regras de "Parlamentares > Fornecedor"  -->
+                                  <div class="card-header" id="headingOne{{regra[0]}}">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" style="padding: 0" type="button" data-toggle="collapse" data-target="#collapseOne{{regra[0]}}" aria-expanded="true" aria-controls="collapseOne">
+                                              {{regra[1] | ajustarNomeRegra}} &#187; {{regra[2] | ajustarNomeRegra }}
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne{{regra[0]}}" class="collapse show" aria-labelledby="headingOne{{regra[0]}}" data-parent="#accordionExample{{regra[0]}}">
+                                      <div class="card-body">
+                                        {% if (regra[1] | verificarPrecedenciaRegra) == 1 %} 
+                                          <b>{{regra[1] | ajustarNomeRegraLHS}}</b> está associado(a) ao(à) {{regra[11] | ajustarTipoRegra}} {{regra[11] | ajustarTipoRegra}} <b>{{regra[2] | ajustarNomeRegraRHS }}</b>. Convênios liderados por <b>{{regra[1] | ajustarNomeRegraLHS}}</b> para este fornecedor aparecem em <b>{{regra[3]}}%</b> das ocorrências de convênios. O que significa dizer que são <b>{{regra[6]}}</b> convênios em um total de <b>{{ regra[13] }}</b> convênios ativos e com faturas pagas. A confiança desta associação é de <b>{{regra[4]}}%</b>, ou seja, <b>{{regra[4]}}%</b> dos convênios do(a) parlamentar <b>{{regra[1] | ajustarNomeRegraLHS}}</b> são voltados para o <b>{{regra[2]  | ajustarNomeRegra}}</b>. Esta dependência possui uma significância estatística de <b>{{regra[9]}}%</b>.
+                                        {% else %}
+                                          À empresa <b> {{regra[1] | ajustarNomeRegra}}</b> está associado(a) ao(à) parlamentar {{regra[11] | ajustarTipoRegra}} {{regra[11] | ajustarTipoRegra}} <b>{{regra[2] | ajustarNomeRegra }}</b>. Convênios executados pela empresa <b>{{regra[1] | ajustarNomeRegraLHS}}</b> aparecem em <b>{{regra[3]}}%</b> das ocorrências de convênios. O que significa dizer que são <b>{{regra[6]}}</b> convênios em um total de <b>{{ regra[13] }}</b> convênios ativos e com faturas pagas. A confiança desta associação é de <b>{{regra[4]}}%</b>, ou seja, <b>{{regra[4]}}%</b> dos convênios do(a) empresa <b>{{regra[1] | ajustarNomeRegraLHS}}</b> são voltados ao(à) parlamentar <b>{{regra[2]  | ajustarNomeRegra}}</b>. Esta dependência possui uma significância estatística de <b>{{regra[9]}}%</b>.
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                {% elif regra[11] == 3 %} <!-- Regras de "Parlamentares > Cidade" --> 
+                                  <div class="card-header" id="headingOne{{regra[0]}}">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" style="padding: 0" type="button" data-toggle="collapse" data-target="#collapseOne{{regra[0]}}" aria-expanded="true" aria-controls="collapseOne">
+                                              {{regra[1] | ajustarNomeRegraLHS}} &#187; {{regra[2] | ajustarNomeRegraRHS }}
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne{{regra[0]}}" class="collapse show" aria-labelledby="headingOne{{regra[0]}}" data-parent="#accordionExample{{regra[0]}}">
+                                      <div class="card-body">
+                                        <b>{{regra[1] | ajustarNomeRegraLHS}}</b> está associado(a) ao(à) {{regra[11] | ajustarTipoRegra}} {{regra[11] | ajustarTipoRegra}} <b>{{regra[2] | ajustarNomeRegraRHS }}</b>. Convênios liderados por <b>{{regra[1] | ajustarNomeRegraLHS}}</b> para esta área aparecem em <b>{{regra[3]}}%</b> das ocorrências de convênios. O que significa dizer que são <b>{{regra[6]}}</b> convênios em um total de <b>{{ regra[13] }}</b> convênios ativos. A confiança desta associação é de <b>{{regra[4]}}%</b>, ou seja, <b>{{regra[4]}}%</b> dos convênios do(a) parlamentar <b>{{regra[1] | ajustarNomeRegraLHS}}</b> são voltados para o <b>{{regra[2]  | ajustarNomeRegraRHS}}</b>. Esta dependência possui uma significância estatística de <b>{{regra[9]}}%</b>.
+                                      </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-sm-12 col-md-12">
+                        <div id="associacoes" style="width: 100%; margin-bottom: 30px; ">
+                          <h2>Associações</h2>
+                          Não foram encontradas regras de associação para o estado d{{estado.artigo}} {{estado.nome}}.
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!--INICIO lista de empresas -->
+                <div class="col-sm-12 col-md-12">
+                    <div id="associacoes" style="width: 100%; margin-bottom: 30px; ">
+                      <h2>As 100 empresas que mais faturaram</h2>
+                        Abaixo segue uma lista com as 100 empresas com maiores faturamentos no período de 2008 a 2018.
+                      </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 associacao" style="background: #eee; overflow: scroll; height: 300px; margin-bottom: 30px;">
+                    <div id="table_EmpresasFaturamento"> </div>
+                  </div>
+                </div>
+                <!--FIM llista de empresas -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIM CONTEÚDO -->
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+<script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/loader.js') }}" ></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/morris.css') }}" >
+
+<script>
+    google.charts.load('current',{'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawProConv);
+    function drawProConv() {
+        var data = google.visualization.arrayToDataTable([
+          ['Ano', 'Quant. Propostas', 'Quant. Convênios'],
+          {% for n in estado.listaQtdPropostaQtdConv %} [ '{{n[0]}}', {{n[1]}}, {{n[2]}}], {% endfor %}
+        ]);
+        var options = {
+          title: 'Quantidade de propostas e de convênios por ano.',
+          chart: {
+            title: 'Quantidades de',
+            subtitle: 'Propostas e Convênios',
+          },
+          colors: ['#1b9e77', '#d95f02', '#7570b3'],
+          backgroundColor: {
+            fill: '#eee'
+          },
+          legend: { position: 'bottom'},
+          vAxis: {format: 'short'},
+        };
+        var table = new google.visualization.ColumnChart(document.getElementById('quant_prop_conv'));
+        table.draw(data, options);
+    }
+
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Ano', 'Valor das Propostas', 'Valor dos Convênios', 'Valor das Contrapartidas'],
+          {% for n in estado.listaQtdPropostaQtdConv %} [ '{{n[0]}}', {{n[3]}}, {{n[4]}}, {{n[5]}} ], {% endfor %}
+        ]);
+        var options = {
+          title: 'Valores totais das emendas parlamentares, dos convênios assinados e das contrapartidas',
+          chart: {
+            title: 'Valores Totais',
+            subtitle: 'Propostas, Convênios e Contrapartidas',
+          },
+          vAxis: {format: 'short'},
+          legend: {position: 'bottom'},
+          backgroundColor: { fill: '#eee' },
+        };
+        var table = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
+        table.draw(data, options);
+    }
+
+    google.charts.setOnLoadCallback(drawChartQuantConvMes12);
+    function drawChartQuantConvMes12() {
+        var data = google.visualization.arrayToDataTable([
+          ['Ano', 'Qtd Convênios', 'Média Nacional Convênios'],
+          {% for x in estado.listDadosConvenioMes12 %} ['{{x[0]}}', {{x[4]}}, {{x[5]}} ], {% endfor %}
+        ]);
+        var options = {
+          title: 'Quantidade de convênios assinados apenas no mês de Dezembro',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          backgroundColor: { fill: '#eee' },
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('quant_conv_mes12'));
+        chart.draw(data, options);
+    }
+
+    google.charts.setOnLoadCallback(drawChartQTDConvMeses);
+    function drawChartQTDConvMeses() {
+        var data = google.visualization.arrayToDataTable([
+          ['Mês', '2008', '2009', '2010', '2011', '2012', '2013', '2013', '2014', '2015', '2016', '2017', '2018'],
+          {% for x in estado.listDadosMesal %}
+            [ '{{x[0]}}', {{x[1]}}, {{x[2]}}, {{x[3]}}, {{x[4]}}, {{x[5]}}, {{x[6]}}, {{x[7]}}, {{x[8]}}, {{x[9]}}, {{x[10]}}, {{x[11]}}, {{x[11]}} ],
+          {% endfor %}
+        ]);
+        var options = {
+          title: 'Quantidade de convênios assinados por mês ao longo do ano',
+          curveType: 'function',
+          legend: { position: 'bottom', maxLines: 2 },
+          backgroundColor: { fill: '#eee' },
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('quant_conv_meses'));
+        chart.draw(data, options);
+    }
+
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawConvParlQtd);
+    function drawConvParlQtd() {
+        var data = google.visualization.arrayToDataTable([
+            ['Parlamentares', 'Quantidade de Convênios',],
+            {% for x in estado.listaConvParlConvTop10 %} [ '{{x[0]}}', {{x[1]}} ], {% endfor %}
+        ]);
+        var options = {
+            title: 'Os 10 parlamentares com maior número de convênios',
+            chartArea: {width: '50%'},
+            legend: { position: 'none'},
+            hAxis: {
+              title: 'Total de convênios',
+              minValue: 0
+            },
+            backgroundColor: { fill: '#eee' },
+            vAxis: { title: 'Parlamentares' }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('conv_parlamentar_quant'));
+        chart.draw(data, options);
+    }
+
+    google.charts.setOnLoadCallback(drawConvParlValor);
+    function drawConvParlValor() {
+        var data = google.visualization.arrayToDataTable([
+            ['Parlamentares', 'Quantidade de Convênios',],
+            {% for x in estado.listaConvParlValorTop10 %}  [ '{{x[0]}}', {{x[1]}} ], {% endfor %}
+        ]);
+        var options = {
+            title: 'Os 10 parlamentares com maiores valores de convênios',
+            chartArea: {width: '50%'},
+            //legend: { position: 'bottom', maxLines: 2 },
+            legend: { position: 'none'},
+            hAxis: {
+              title: 'Valor total dos convênios',
+              minValue: 0
+            },
+            backgroundColor: { fill: '#eee' },
+            vAxis: { title: 'Parlamentares' }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('conv_parlamentar_valor'));
+        chart.draw(data, options);
+    }
+
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawPieChartCidade_valor);
+    function drawPieChartCidade_valor() {
+        var data = google.visualization.arrayToDataTable([
+            ['Proponente', 'Valor Total'],
+            {% for x in estado.listaConvCidadeValorTop10 %} [ '{{x[0]| ajustarApostrofo}}', {{x[2]}} ], {% endfor %}
+        ]);
+        var options = {
+          title: 'Distribuição dos recursos por proponentes',
+          legend: { position: 'right', maxLines: 2 },
+          backgroundColor: { fill: '#eee' },
+        };
+        var formatter = new google.visualization.NumberFormat({
+            prefix: 'R$', 
+            negativeColor: 'red', 
+            negativeParens: true,
+            decimalSymbol: ',',
+            groupingSymbol: '.'
+        });
+        formatter.format(data, 1); // Apply formatter to second column
+        var chart = new google.visualization.PieChart(document.getElementById('PieChartCidade_valor'));
+        chart.draw(data, options);
+    }
+
+    google.charts.setOnLoadCallback(drawPieChartSituacaoConvenio);
+    function drawPieChartSituacaoConvenio() {
+        var data = google.visualization.arrayToDataTable([
+            ['Situação', 'Quantidade'],
+            {% for x in estado.listaSituacaoConvTop10 %} [ '{{x[0]}}', {{x[1]}} ], {% endfor %}
+        ]);
+        var options = {
+          title: 'Situação dos convênios',
+          legend: { position: 'right', maxLines: 2 },
+          backgroundColor: { fill: '#eee' },
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('PieChartSituacaoConvenio'));
+        chart.draw(data, options);
+    }
+
+    google.charts.setOnLoadCallback(drawPieChartDistribuicaoArea);
+    function drawPieChartDistribuicaoArea() {
+        var data = google.visualization.arrayToDataTable([
+            ['Situação', 'Quantidade'],
+            {% for x in estado.listaDistribuicaoAreaTop10 %} [ '{{x[0]}}', {{x[1]}} ], {% endfor %}
+        ]);
+        var options = {
+           title: 'Distribuição dos recursos por área',
+           legend: { position: 'right', maxLines: 2 },
+           backgroundColor: { fill: '#eee' },
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('PieChartDistribuicaoArea'));
+        chart.draw(data, options);
+    }  
+
+    {%set dados = []%}
+    {% for ano in estado.dataSetOutlier.keys() %}
+        var trace{{ano}} = {
+            y: {{estado.dataSetOutlier.get(ano)}},
+            type: 'box',
+            name: {{ano}},
+            boxpoints: 'Outliers'};
+        {% set dados2 = dados.append( 'trace' + ano | string ) %}
+    {% endfor %}
+    var dadosGrafico = {{dados | replace('\'', '' )}} ;
+    layout = {
+      title: 'Distribuição dos valores discrepantes no estado d{{estado.artigo}} {{estado.nome}}',
+      paper_bgcolor: '#eee',
+      plot_bgcolor: '#eee',
+      showlegend: true}
+    Plotly.newPlot('box_plot', dadosGrafico, layout );
+
+    google.charts.load('current', {'packages':['table']});
+    
+    google.charts.setOnLoadCallback(drawTablePalamentaresQuantidadeConveniosAtivos);
+    function drawTablePalamentaresQuantidadeConveniosAtivos() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Parlamentar');
+        data.addColumn('number', 'Quantidade');
+        data.addRows([
+        {% for pc in estado.listaConvParlConv %} ['{{pc[0]}}',  {{pc[1]}}], {% endfor %} ]);
+        var formatterInteger = new google.visualization.NumberFormat({
+            negativeColor: 'red', 
+            negativeParens: true,
+            fractionDigits: 0,
+            groupingSymbol: '.'});
+        formatterInteger.format(data, 1);
+        var table = new google.visualization.Table(document.getElementById('table_ParlamentaresQuantidadeConveniosAtivos'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+        function selectHandler() {
+          var selectedItem = table.getSelection();
+          var item = selectedItem[0]
+          var str = dataitem
+          alert( data.getFormattedValue( selectedItem.row ) );
+          /*
+          alert( selectedItem + '-' + selectedItem.row + '-' + selectedItem.column );
+          var newTab = window.open( 'index', '_blank');
+          if (newTab){
+            newTab.focus();
+          } else {
+            alert( 'teste' )
+          }
+          */
+        }
+        google.visualization.events.addListener(table, 'select', selectHandler);
+    }
+
+    google.charts.setOnLoadCallback(drawTablePalamentaresValoresConveniosAtivos);
+    function drawTablePalamentaresValoresConveniosAtivos() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Parlamentar');
+        data.addColumn('number', 'Valor Total');
+        data.addRows([
+        {% for pv in estado.listaConvParlValor  %} ['{{pv[0]}}',  {{pv[1]}}], {% endfor %} ]);
+        var formatter = new google.visualization.NumberFormat({
+            prefix: 'R$', 
+            negativeColor: 'red', 
+            negativeParens: true,
+            decimalSymbol: ',',
+            groupingSymbol: '.'
+        });
+        formatter.format(data, 1); // Apply formatter to second column
+        var table = new google.visualization.Table(document.getElementById('table_ParlamentaresValoresConveniosAtivos'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    }
+
+    google.charts.setOnLoadCallback(drawTableDistribuicaoArea);
+    function drawTableDistribuicaoArea() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Área');
+        data.addColumn('number', 'Valor');
+        data.addRows([
+        {% for da in estado.listaDistribuicaoArea %} ['{{da[0]}}',  {{da[1]}}], {% endfor %}
+        ]);
+        var formatter = new google.visualization.NumberFormat({
+            prefix: 'R$', 
+            negativeColor: 'red', 
+            negativeParens: true,
+            decimalSymbol: ',',
+            groupingSymbol: '.'
+        });
+        formatter.format(data, 1); // Apply formatter to second column
+        var table = new google.visualization.Table(document.getElementById('table_DistribuicaoArea'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    }
+
+    google.charts.setOnLoadCallback(drawTableSituacaoConvenios);
+    function drawTableSituacaoConvenios() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Situação');
+        data.addColumn('number', 'Quantidade');
+        data.addRows([
+        {% for sc in estado.listaSituacaoConv %} ['{{sc[0]}}',  {{sc[1]}}], {% endfor %}
+        ]);
+        var formatterInteger = new google.visualization.NumberFormat({
+            negativeColor: 'red', 
+            negativeParens: true,
+            fractionDigits: 0,
+            groupingSymbol: '.'});
+        formatterInteger.format(data, 1);
+        var table = new google.visualization.Table(document.getElementById('table_SituacaoConvenios'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    }
+
+    google.charts.setOnLoadCallback(drawTableCidadeValor);
+    function drawTableCidadeValor() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Proponente');
+        data.addColumn('number', 'Quantidade');
+        data.addColumn('number', 'Valor Total');
+        data.addRows([
+          {% for cv in estado.listaConvCidadeValor %} ['{{cv[0] | ajustarApostrofo}}',  {{cv[1]}}, {{cv[2]}}], {% endfor %} 
+        ]);
+        var formatter = new google.visualization.NumberFormat({
+            prefix: 'R$', 
+            negativeColor: 'red', 
+            negativeParens: true,
+            decimalSymbol: ',',
+            groupingSymbol: '.'});
+        formatter.format(data, 2); // Apply formatter to second column
+        var table = new google.visualization.Table(document.getElementById('table_CidadeValor'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    }
+
+    google.charts.setOnLoadCallback(drawTableEmpresasFaturamento);
+    function drawTableEmpresasFaturamento() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Empresa');
+        data.addColumn('number', 'Qtd Faturas');
+        data.addColumn('number', 'Valor Total');
+        data.addRows([
+        {% for e in estado.listaEmpresasFaturamento %} ['{{e[0] | ajustarApostrofo}}',  {{e[1]}}, {{e[2]}}], {% endfor %} ]);
+        var formatterMoney = new google.visualization.NumberFormat({
+            prefix: 'R$', 
+            negativeColor: 'red', 
+            negativeParens: true,
+            decimalSymbol: ',',
+            groupingSymbol: '.'});
+        var formatterInteger = new google.visualization.NumberFormat({
+            negativeColor: 'red', 
+            negativeParens: true,
+            fractionDigits: 0,
+            groupingSymbol: '.'});
+        formatterInteger.format(data, 1); // Apply formatter to second column
+        formatterMoney.format(data, 2); // Apply formatter to second column
+        var table = new google.visualization.Table(document.getElementById('table_EmpresasFaturamento'));
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    }
+
+    $('.decimal').maskMoney({
+        prefix: '',
+        thousands: '.',
+        precision: 2,
+        defaultZero: true,
+        allowZero: false,
+        allowNegative: false,
+        decimal: ',',
+        affixesStay: true
+    });</script>
+{% endblock %}

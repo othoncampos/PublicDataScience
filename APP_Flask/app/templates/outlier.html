@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block page %}
+<style>
+    .btn {
+        font-size:0.8rem !important;
+    }
+</style>
+<!-- TÍTULO -->
+<section class="mbr-section content5 cid-qRKDq0puBd mbr-parallax-background" id="content5-w">
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(72, 69, 129);">
+    </div>
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-12">
+                <h2 class="align-center mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
+                    Convênios com <i>outliers</i> do estada d{{estado.artigo}} {{estado.nome}}
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- CONTEÚDO -->
+<section class="mbr-section padding-20" id="">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/index"><i class="fa fa-dashboard"></i> Início</a></li>
+            <span>&nbsp;/&nbsp;</span>
+            <li><a href="/estado/{{estado.sigla}}"><i class="fa fa-dashboard"></i> {{estado.nome}}</a></li>
+            <span>&nbsp;/&nbsp;</span>
+            Outlier
+        </ol>
+        <div class="">
+        	<!-- Colocar o For aqui-->
+        	<div class="col-sm-12 col-md-12 associacao">
+        		<div class="accordion" id="accordionExample"><!-- Colocar aqui a variavel para o nome do componente quando o for for utilizado-->
+                    <div class="card">
+						<div class="card-header" id="headingOne"><!-- Colocar aqui a variavel para o nome do componente quando o for for utilizado-->
+							<h5 class="mb-0">
+								<!-- #collapseOne Colocar aqui a variavel para o nome do componente quando o for for utilizado-->
+								<button class="btn btn-link" style="padding: 0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								Outlier &#187; {{estado.nome }} &#187; 2018
+								</button>
+							</h5>
+						</div>
+						<!-- #collapseOne Colocar aqui a variavel para o nome do componente quando o for for utilizado-->
+						<!-- #headingOne Colocar aqui a variavel para o nome do componente quando o for for utilizado-->
+						<!-- #accordionExampleColocar aqui a variavel para o nome do componente quando o for for utilizado-->
+						<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body">
+                                <div class="table-responsive-sm">
+                                    <table class="table table-sm table-hover">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Nr. Conv.</th>
+                                                <th scope="col">Vl. Global</th>
+                                                <th scope="col">Proponente</th>
+                                                <th scope="col">Área</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                              <td scope="row">nr_conv</td>
+                                              <td>vl_global</td>
+                                              <td>nm_proponente</td>
+                                              <td>area</td>
+                                            </tr>
+                                            <tr>
+                                              <th>Descriçao</th>
+                                              <td colspan="3">descricao_convenio</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle" rowspan="3">Parlamentar</th>
+                                                <th colspan="2">Nome</th>
+                                                <th>Valor Emenda</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Nome</td>
+                                                <td>Valor Emenda</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Nome</td>
+                                                <td>Valor Emenda</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-middle" rowspan="3">Favorecido</th>
+                                                <th>Nome</th>
+                                                <th>Qtd. Faturas</th>
+                                                <th>Valor Faturado</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Nome</td>
+                                                <td>qtd</td>
+                                                <td>Valor</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nome</td>
+                                                <td>qtd</td>
+                                                <td>Valor</td>
+                                            </tr>
+                                          </tbody>
+                                    </table>
+                                </div>
+							</div>
+						</div>
+        			</div>
+        		</div>
+        	</div>
+        </div><!-- class=""-->
+
+
+    </div>
+</section>
+<!-- FIM TÍTULO -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+<script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/loader.js') }}" ></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/morris.css') }}" >
+{% endblock %}

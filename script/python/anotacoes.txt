@@ -1,0 +1,16 @@
+- Arquivo siconv_proponentes.csv : 
+- Arquivo siconv_proposta.csv    : 808128
+- Arquivo siconv_convenio.csv    : 171782
+- Arquivo siconv_emenda.csv      : 
+- Arquivo siconv_pagamento.csv   : 3669063
+
+
+#os parâmetros são: Nome da tabela e nome do arquivo
+python3 import_dados.py siconv_proposta ./2019.07.03/siconv/siconv_proposta.csv	
+python3 import_dados.py siconv_convenio ./2019.07.03/siconv/siconv_convenio.csv
+python3 import_dados.py siconv_emenda ./2019.07.03/siconv/siconv_emenda.csv
+python3 import_dados.py siconv_pagamento ./2019.07.03/siconv/siconv_pagamento.csv
+python3 import_dados.py populacao_estimada ./populacao_estimada.csv
+
+
+
